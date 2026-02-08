@@ -1,0 +1,19 @@
+{
+  "name": "blocklylisp",
+  "version": "1.0.0",
+  "description": "Visual Scheme Editor with Blockly and BiwaScheme",
+  "main": "index.html",
+  "scripts": {
+    "start": "npx http-server -o -c-1",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": ["blockly", "scheme", "lisp", "visual-programming", "biwascheme"],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "dependencies": {
+    "@material/web": "^2.4.1",
+    "biwascheme": "^0.8.3",
+    "blockly": "^12.3.1"
+  }
+}
