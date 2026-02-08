@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>BlocklyScheme – Visual Scheme Editor</title>
+  <link rel="stylesheet" href="styles.css">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&family=Roboto+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+</head>
+<body>
+
+  <!-- Header -->
+  <header class="app-header">
+    <div class="header-left">
+      <span class="material-icons app-logo">extension</span>
+      <h1 class="app-title" data-i18n="appTitle">BlocklyScheme</h1>
+    </div>
+    <div class="header-center">
+      <button class="md-button md-button-filled" id="runBtn">
+        <span class="material-icons">play_arrow</span>
+        <span data-i18n="run">Run</span>
+      </button>
+      <button class="md-button md-button-outlined" id="clearBtn">
+        <span class="material-icons">delete_sweep</span>
+        <span data-i18n="clear">Clear</span>
+      </button>
+      <button class="md-button md-button-outlined" id="exportBtn">
+        <span class="material-icons">download</span>
+        <span data-i18n="export">Export</span>
+      </button>
+    </div>
+    <div class="header-right">
+      <button class="md-icon-button" id="settingsBtn" aria-label="Settings">
+        <span class="material-icons">settings</span>
+      </button>
+    </div>
+  </header>
+
+  <!-- Main -->
+  <main class="app-main">
+    <!-- Blockly workspace (fills remaining space; toolbox rendered by Blockly) -->
+    <section class="pane pane-middle" id="workspacePane">
+      <div id="blocklyDiv"></div>
+    </section>
+
+    <!-- Right pane – code + console -->
+    <aside class="pane pane-right" id="outputPane">
+      <div class="output-section code-section">
+        <div class="pane-header">
+          <span class="material-icons">code</span>
+          <span data-i18n="generatedCode">Generated Code</span>
+          <button class="md-icon-button small" id="copyCodeBtn" title="Copy code">
+            <span class="material-icons">content_copy</span>
+          </button>
+        </div>
+        <pre class="code-view" id="codeOutput"><code>; Your Scheme code will appear here</code></pre>
+      </div>
+      <div class="output-section console-section">
+        <div class="pane-header">
+          <span class="material-icons">terminal</span>
+          <span data-i18n="console">Console</span>
+          <button class="md-icon-button small" id="clearConsoleBtn" title="Clear console">
+            <span class="material-icons">clear_all</span>
+          </button>
+        </div>
+        <div class="console-output" id="consoleOutput">
+          <div class="console-line console-info" data-i18n="consoleWelcome">Welcome to BlocklyScheme! Click "Run" to execute your code.</div>
+        </div>
+      </div>
+    </aside>
+  </main>
+
+  <!-- Settings Modal -->
+  <div class="modal-overlay" id="settingsModal">
+    <div class="modal">
+      <div class="modal-header">
+        <h2 data-i18n="settings">Settings</h2>
+        <button class="md-icon-button" id="closeSettingsBtn">
+          <span class="material-icons">close</span>
+        </button>
+      </div>
+      <div class="modal-content">
+        <div class="settings-section">
+          <h3 data-i18n="appearance">Appearance</h3>
+          <div class="setting-item">
+            <label data-i18n="theme">Theme</label>
+            <div class="theme-toggle" id="themeToggle">
+              <button class="theme-btn" data-theme="light" title="Light">
+                <span class="material-icons">light_mode</span>
+              </button>
+              <button class="theme-btn" data-theme="system" title="System">
+                <span class="material-icons">contrast</span>
+              </button>
+              <button class="theme-btn" data-theme="dark" title="Dark">
+                <span class="material-icons">dark_mode</span>
+              </button>
+            </div>
+          </div>
+          <div class="setting-item">
+            <label data-i18n="primaryColor">Primary Color</label>
+            <div class="color-picker">
+              <button class="color-swatch" data-color="#6750A4" style="background:#6750A4" title="Purple"></button>
+              <button class="color-swatch" data-color="#0061A4" style="background:#0061A4" title="Blue"></button>
+              <button class="color-swatch" data-color="#006E1C" style="background:#006E1C" title="Green"></button>
+              <button class="color-swatch" data-color="#BA1A1A" style="background:#BA1A1A" title="Red"></button>
+              <button class="color-swatch" data-color="#7D5260" style="background:#7D5260" title="Pink"></button>
+              <button class="color-swatch" data-color="#FF6F00" style="background:#FF6F00" title="Orange"></button>
+            </div>
+          </div>
+          <div class="setting-item">
+            <label data-i18n="fontSize">Font Size</label>
+            <div class="font-size-control">
+              <button class="md-icon-button small" id="fontDecrease">
+                <span class="material-icons">remove</span>
+              </button>
+              <span id="fontSizeDisplay">14px</span>
+              <button class="md-icon-button small" id="fontIncrease">
+                <span class="material-icons">add</span>
+              </button>
+            </div>
+          </div>
+        </div>
+        <div class="settings-section">
+          <h3 data-i18n="language">Language</h3>
+          <div class="setting-item">
+            <select id="languageSelect" class="md-select">
+              <option value="en">English</option>
+              <option value="zh">中文 (Chinese)</option>
+              <option value="es">Español (Spanish)</option>
+              <option value="ar">العربية (Arabic)</option>
+              <option value="fr">Français (French)</option>
+              <option value="ru">Русский (Russian)</option>
+              <option value="ja">日本語 (Japanese)</option>
+            </select>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Scripts -->
+  <script src="lib/blockly/blockly_compressed.js"></script>
+  <script src="lib/blockly/blocks_compressed.js"></script>
+  <script src="lib/blockly/msg/en.js"></script>
+  <script src="lib/biwascheme/biwascheme-min.js"></script>
+  <script src="i18n.js"></script>
+  <script src="blocks.js"></script>
+  <script src="generator.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
