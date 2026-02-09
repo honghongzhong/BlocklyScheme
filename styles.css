@@ -97,6 +97,58 @@
   --grid-colour: #35333a;
 }
 
+/* Dark Mode for Blockly Inputs & Dropdowns */
+[data-theme="dark"] .blocklyHtmlInput {
+  background-color: #211F26 !important;
+  color: #E6E1E5 !important;
+  caret-color: #E6E1E5 !important;
+  border: 1px solid #938F99 !important;
+  border-radius: 4px;
+  font-family: 'Roboto Mono', monospace !important;
+}
+[data-theme="dark"] .blocklyDropDownDiv {
+  background-color: var(--md-surface-container-high) !important;
+  border-color: var(--md-outline-variant) !important;
+  color: var(--md-on-surface) !important;
+  box-shadow: var(--shadow-2) !important;
+}
+[data-theme="dark"] .blocklyMenuItemContent {
+  color: var(--md-on-surface) !important;
+  font-family: var(--font-sans) !important;
+}
+[data-theme="dark"] .blocklyMenuItem:hover {
+  background-color: var(--md-outline-variant) !important;
+}
+[data-theme="dark"] .blocklyFlyoutBackground {
+  fill: var(--md-surface-container-low) !important;
+  fill-opacity: 0.95;
+}
+
+/* Fix for SVG Input Fields in Blocks (The white boxes) */
+/* Force black text for legibility against the white background */
+[data-theme="dark"] .blocklyEditableText > text,
+[data-theme="dark"] .blocklyEditableText text,
+[data-theme="dark"] .blocklyEditableText .blocklyText,
+[data-theme="dark"] .blocklyFieldText {
+  fill: #000000 !important;
+}
+
+/* Ensure background is white to match the black text */
+[data-theme="dark"] .blocklyEditableText > rect,
+[data-theme="dark"] .blocklyEditableText rect {
+  fill: #ffffff !important;
+  stroke: #938F99 !important;
+  stroke-width: 1px;
+  fill-opacity: 1 !important;
+}
+
+[data-theme="dark"] .blocklyEditableText:hover > rect,
+[data-theme="dark"] .blocklyEditableText:hover rect {
+  stroke: var(--md-primary) !important;
+  stroke-width: 1px !important;
+}
+
+
 /* ═══════════════ Reset ═══════════════ */
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 html { font-size: 14px; -webkit-font-smoothing: antialiased; }
@@ -140,6 +192,7 @@ body {
   cursor: pointer; border: none; outline: none;
   transition: all .15s var(--ease); white-space: nowrap;
 }
+.md-button:active, .md-icon-button:active { transform: scale(0.96); }
 .md-button .material-icons { font-size: 18px; }
 .md-button-filled {
   background: var(--md-primary); color: var(--md-on-primary);
@@ -201,7 +254,13 @@ body {
   font-family: var(--font-mono); font-size: var(--code-font-size, .8rem); line-height: 1.65;
   background: var(--md-surface-container-lowest);
   color: var(--md-on-surface);
-  overflow: auto; white-space: pre-wrap; word-break: break-word;
+  overflow: auto; 
+  /* Textarea specific */
+  resize: none; border: none; outline: none; 
+  width: 100%; height: 100%; box-sizing: border-box;
+}
+.code-view:focus {
+  background: var(--md-surface-container-low);
 }
 .code-view code { color: inherit; }
 
@@ -377,16 +436,13 @@ body {
 
 /* Block text legibility in dark mode */
 [data-theme="dark"] .blocklyText {
-  fill: #fff !important;
-}
-[data-theme="dark"] .blocklyEditableText > .blocklyText {
-  fill: #fff !important;
+  fill: #000000 !important;
 }
 [data-theme="dark"] .blocklyDropdownText {
-  fill: #fff !important;
+  fill: #E6E1E5 !important;
 }
 [data-theme="dark"] .blocklyIconGroup text {
-  fill: #fff !important;
+  fill: #E6E1E5 !important;
 }
 
 /* Trash can */

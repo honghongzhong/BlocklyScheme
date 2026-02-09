@@ -33,6 +33,20 @@ const I18n = {
       noCode: 'No code to execute. Add some blocks to the workspace.',
       codeCopied: 'Code copied to clipboard!',
       
+      // Blocks
+      blockNumber: 'A number literal',
+      blockString: 'A string literal',
+      blockBoolean: 'Boolean value',
+      blockSymbol: 'A quoted symbol',
+      blockChar: 'Character literal, e.g. #\\a',
+      blockNil: 'Empty list (nil)',
+      blockVariable: 'Reference a variable by name',
+      blockQuote: 'Quote an expression: (quote expr)',
+      blockMathOp: 'Arithmetic: (op a b)',
+      blockComparison: 'Compare two values',
+      valTrue: '#t (true)',
+      valFalse: '#f (false)',
+
       // Settings
       settings: 'Settings',
       appearance: 'Appearance',
@@ -397,6 +411,20 @@ const I18n = {
       noCode: '実行するコードがありません。ワークスペースにブロックを追加してください。',
       codeCopied: 'コードがクリップボードにコピーされました！',
       
+      // Blocks
+      blockNumber: '数値リテラル',
+      blockString: '文字列リテラル',
+      blockBoolean: '真偽値',
+      blockSymbol: 'シンボル',
+      blockChar: '文字リテラル (例: #\\a)',
+      blockNil: '空リスト (nil)',
+      blockVariable: '変数参照',
+      blockQuote: '式の引用 (quote)',
+      blockMathOp: '算術演算',
+      blockComparison: '比較',
+      valTrue: '#t (真)',
+      valFalse: '#f (偽)',
+
       // Settings
       settings: '設定',
       appearance: '外観',

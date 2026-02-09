@@ -2,7 +2,7 @@
 # BlocklyScheme
 
 > **在线演示地址：** [https://honghongzhong.github.io/BlocklyScheme/](https://honghongzhong.github.io/BlocklyScheme/)
-**English version: [README.md](README.md)**
+> **English version: [README.md](README.md)**
 
 ## 项目缘由
 本项目旨在辅助学习经典教材 [计算机程序的构造和解释（SICP）](https://mitp-content-server.mit.edu/books/content/sectbyfn/books_pres_0/6515/sicp.zip/index.html)。通过结合可视化编程（Blockly）与 Scheme/Lisp 代码生成，让 SICP 的练习更加直观和互动。

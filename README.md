@@ -2,7 +2,7 @@
 # BlocklyScheme
 
 > **Live Demo:** [https://honghongzhong.github.io/BlocklyScheme/](https://honghongzhong.github.io/BlocklyScheme/)
-**中文版说明请见：[README.zh.md](README.zh.md)**
+> **中文版说明请见：[README.zh.md](README.zh.md)**
 
 ## Motivation
 This project was created as a tool for learning and practicing concepts from the classic book [Structure and Interpretation of Computer Programs (SICP)](https://mitp-content-server.mit.edu/books/content/sectbyfn/books_pres_0/6515/sicp.zip/index.html). By combining visual programming (Blockly) with Scheme/Lisp code generation, it aims to make SICP exercises more accessible and interactive.
