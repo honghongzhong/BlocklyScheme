@@ -37,7 +37,7 @@
       contents: [
         /* ---- Values ---- */
         {
-          kind: 'category', name: 'Values', colour: '20',
+          kind: 'category', name: I18n.t('catValues'), colour: '20',
           contents: [
             { kind: 'block', type: 'scheme_number' },
             { kind: 'block', type: 'scheme_string' },
@@ -50,7 +50,7 @@
         },
         /* ---- Math ---- */
         {
-          kind: 'category', name: 'Math', colour: '230',
+          kind: 'category', name: I18n.t('catMath'), colour: '230',
           contents: [
             { kind: 'block', type: 'scheme_math_op' },
             { kind: 'block', type: 'scheme_comparison' },
@@ -61,7 +61,7 @@
         },
         /* ---- Logic ---- */
         {
-          kind: 'category', name: 'Logic', colour: '210',
+          kind: 'category', name: I18n.t('catLogic'), colour: '210',
           contents: [
             { kind: 'block', type: 'scheme_and' },
             { kind: 'block', type: 'scheme_or' },
@@ -72,7 +72,7 @@
         },
         /* ---- Control ---- */
         {
-          kind: 'category', name: 'Control', colour: '330',
+          kind: 'category', name: I18n.t('catControlFlow'), colour: '330',
           contents: [
             { kind: 'block', type: 'scheme_if' },
             { kind: 'block', type: 'scheme_cond' },
@@ -84,7 +84,7 @@
         },
         /* ---- Loops ---- */
         {
-          kind: 'category', name: 'Loops', colour: '80',
+          kind: 'category', name: I18n.t('catLoops'), colour: '80',
           contents: [
             { kind: 'block', type: 'scheme_do' },
             { kind: 'block', type: 'scheme_for_each' },
@@ -92,7 +92,7 @@
         },
         /* ---- Lists ---- */
         {
-          kind: 'category', name: 'Lists', colour: '260',
+          kind: 'category', name: I18n.t('catLists'), colour: '260',
           contents: [
             { kind: 'block', type: 'scheme_list' },
             { kind: 'block', type: 'scheme_cons' },
@@ -155,7 +155,7 @@
         },
         /* ---- Hashtables ---- */
         {
-          kind: 'category', name: 'Hashtables', colour: '180',
+          kind: 'category', name: I18n.t('catHashTables'), colour: '180',
           contents: [
             { kind: 'block', type: 'scheme_make_hashtable' },
             { kind: 'block', type: 'scheme_hashtable_set' },
@@ -167,7 +167,7 @@
         },
         /* ---- I/O ---- */
         {
-          kind: 'category', name: 'I/O', colour: '340',
+          kind: 'category', name: I18n.t('catIO'), colour: '340',
           contents: [
             { kind: 'block', type: 'scheme_display' },
             { kind: 'block', type: 'scheme_newline' },
@@ -178,7 +178,7 @@
         },
         /* ---- Advanced ---- */
         {
-          kind: 'category', name: 'Advanced', colour: '45',
+          kind: 'category', name: I18n.t('catAdvanced'), colour: '45',
           contents: [
             { kind: 'block', type: 'scheme_define_macro' },
             { kind: 'block', type: 'scheme_quote' },
@@ -195,7 +195,7 @@
         },
         /* ---- BiwaScheme ---- */
         {
-          kind: 'category', name: 'BiwaScheme', colour: '0',
+          kind: 'category', name: I18n.t('catBiwaScheme'), colour: '0',
           contents: [
             { kind: 'block', type: 'scheme_console_log' },
             { kind: 'block', type: 'scheme_alert' },
@@ -306,13 +306,13 @@
   }
 
   function updateGeneratedCode() {
-    const codeEl = document.querySelector('#codeOutput code');
+    const codeEl = document.getElementById('codeOutput');
     if (!workspace) return;
     try {
       const code = SchemeGenerator.workspaceToCode(workspace);
-      codeEl.textContent = code || '; (empty)';
+      codeEl.value = code || '; (empty)';
     } catch (err) {
-      codeEl.textContent = '; Error generating code:\n; ' + err.message;
+      codeEl.value = '; Error generating code:\n; ' + err.message;
       console.error('Code generation error:', err);
     }
   }
@@ -322,10 +322,10 @@
   ---------------------------------------------------------- */
   function runCode() {
     const consoleEl = document.getElementById('consoleOutput');
-    const codeEl = document.querySelector('#codeOutput code');
-    const code = codeEl.textContent;
+    const codeEl = document.getElementById('codeOutput');
+    const code = codeEl.value;
 
-    if (!code || code.startsWith('; (empty)') || code.startsWith('; Error')) {
+    if (!code || code.startsWith('; (empty)')) {
       appendConsoleLine('Nothing to run.', 'console-warn');
       return;
     }
@@ -380,7 +380,7 @@
      Export code
   ---------------------------------------------------------- */
   function exportCode() {
-    const code = document.querySelector('#codeOutput code').textContent;
+    const code = document.getElementById('codeOutput').value;
     const blob = new Blob([code], { type: 'text/plain' });
     const a = document.createElement('a');
     a.href = URL.createObjectURL(blob);
@@ -393,7 +393,7 @@
      Copy code
   ---------------------------------------------------------- */
   function copyCode() {
-    const code = document.querySelector('#codeOutput code').textContent;
+    const code = document.getElementById('codeOutput').value;
     navigator.clipboard.writeText(code).then(() => {
       const btn = document.getElementById('copyCodeBtn');
       btn.querySelector('.material-icons').textContent = 'check';
@@ -491,6 +491,9 @@
       saveSettings();
       if (typeof I18n !== 'undefined') {
         I18n.setLanguage(settings.language);
+        if (workspace) {
+           workspace.updateToolbox(buildToolbox());
+        }
       }
     });
   }

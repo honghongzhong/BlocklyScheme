@@ -28,7 +28,7 @@ Blockly.Blocks['scheme_number'] = {
         .appendField(new Blockly.FieldNumber(0), 'NUM');
     this.setOutput(true, 'Number');
     this.setColour(230);
-    this.setTooltip('A number literal');
+    this.setTooltip(function() { return I18n.t('blockNumber'); });
   }
 };
 
@@ -40,20 +40,19 @@ Blockly.Blocks['scheme_string'] = {
         .appendField('"');
     this.setOutput(true, 'String');
     this.setColour(160);
-    this.setTooltip('A string literal');
+    this.setTooltip(function() { return I18n.t('blockString'); });
   }
 };
 
 Blockly.Blocks['scheme_boolean'] = {
   init: function () {
     this.appendDummyInput()
-        .appendField(new Blockly.FieldDropdown([
-          ['#t (true)', '#t'],
-          ['#f (false)', '#f']
-        ]), 'BOOL');
+        .appendField(new Blockly.FieldDropdown(function() { 
+          return [[I18n.t('valTrue'), '#t'], [I18n.t('valFalse'), '#f']];
+        }), 'BOOL');
     this.setOutput(true, 'Boolean');
     this.setColour(210);
-    this.setTooltip('Boolean value');
+    this.setTooltip(function() { return I18n.t('blockBoolean'); });
   }
 };
 
@@ -64,7 +63,7 @@ Blockly.Blocks['scheme_symbol'] = {
         .appendField(new Blockly.FieldTextInput('symbol'), 'SYMBOL');
     this.setOutput(true, 'Symbol');
     this.setColour(20);
-    this.setTooltip('A quoted symbol');
+    this.setTooltip(function() { return I18n.t('blockSymbol'); });
   }
 };
 
@@ -75,7 +74,7 @@ Blockly.Blocks['scheme_char'] = {
         .appendField(new Blockly.FieldTextInput('a'), 'CHAR');
     this.setOutput(true, 'Char');
     this.setColour(160);
-    this.setTooltip('Character literal, e.g. #\\a  #\\space  #\\newline');
+    this.setTooltip(function() { return I18n.t('blockChar'); });
   }
 };
 
@@ -84,7 +83,7 @@ Blockly.Blocks['scheme_nil'] = {
     this.appendDummyInput().appendField("'()");
     this.setOutput(true, 'List');
     this.setColour(260);
-    this.setTooltip('Empty list (nil)');
+    this.setTooltip(function() { return I18n.t('blockNil'); });
   }
 };
 
@@ -93,7 +92,7 @@ Blockly.Blocks['scheme_quote'] = {
     this.appendValueInput('EXPR').appendField('quote');
     this.setOutput(true, null);
     this.setColour(20);
-    this.setTooltip("Quote an expression: (quote expr)");
+    this.setTooltip(function() { return I18n.t('blockQuote'); });
   }
 };
 
@@ -103,7 +102,7 @@ Blockly.Blocks['scheme_variable'] = {
         .appendField(new Blockly.FieldTextInput('x'), 'NAME');
     this.setOutput(true, null);
     this.setColour(130);
-    this.setTooltip('Reference a variable by name');
+    this.setTooltip(function() { return I18n.t('blockVariable'); });
   }
 };
 
@@ -124,7 +123,7 @@ Blockly.Blocks['scheme_math_op'] = {
     this.setOutput(true, 'Number');
     this.setColour(230);
     this.setInputsInline(true);
-    this.setTooltip('Arithmetic: (op a b)');
+    this.setTooltip(function() { return I18n.t('blockMathOp'); });
   }
 };
 
@@ -140,7 +139,7 @@ Blockly.Blocks['scheme_comparison'] = {
     this.setOutput(true, 'Boolean');
     this.setColour(210);
     this.setInputsInline(true);
-    this.setTooltip('Compare two values');
+    this.setTooltip(function() { return I18n.t('blockComparison'); });
   }
 };
 
